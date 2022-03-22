@@ -47,13 +47,6 @@ generate_messages(DEPENDENCIES
   sensor_msgs
 )
 
-catkin_package(
- INCLUDE_DIRS include
-#  LIBRARIES test
- CATKIN_DEPENDS message_generation message_runtime roscpp rospy
-#  DEPENDS system_lib
-)
-
 include_directories(
   # include
   ${catkin_INCLUDE_DIRS}
@@ -65,13 +58,3 @@ add_executable(md80_node src/md80_node.cpp)
 target_link_libraries(md80_node "${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/lib/libcandle.so" ${catkin_LIBRARIES}) 
 target_include_directories(md80_node PUBLIC ./include)
 add_dependencies(md80_node ${${PROJECT_NAME}_EXPORTED_TARGETS})
-
-# install(TARGETS md80_node 
-#   DESTINATION lib/${PROJECT_NAME}
-#   RUNTIME DESTINATION lib/${PROJECT_NAME}
-#   )
-# install(FILES lib/libcandle.so 
-#   DESTINATION lib/${PROJECT_NAME}/
-#   )
-
-# /home/klonyyy/MAB/drives/ros1_workspace/src/ros1_mab_md80/src/ros1_mab_md80/lib

@@ -23,6 +23,7 @@ Md80Node::Md80Node()
 	
 	ROS_INFO("md80_node has started.");
 }
+
 Md80Node::~Md80Node()
 {
 	delete candle;
@@ -35,9 +36,10 @@ bool Md80Node::service_addMd80(ros1_mab_md80::AddMd80s::Request& request, ros1_m
 		response.drives_success.push_back(candle->addMd80(id));
 
 	response.total_number_of_drives = candle->md80s.size();
-	
+
 	return true;
 }
+
 bool Md80Node::service_zeroMd80(ros1_mab_md80::GenericMd80Msg::Request& request, ros1_mab_md80::GenericMd80Msg::Response& response)
 {
 	for(auto&id : request.drive_ids)
@@ -45,6 +47,7 @@ bool Md80Node::service_zeroMd80(ros1_mab_md80::GenericMd80Msg::Request& request,
 
 	return true;
 }
+
 bool Md80Node::service_setModeMd80(ros1_mab_md80::SetModeMd80s::Request& request, ros1_mab_md80::SetModeMd80s::Response& response)
 {
 	if(request.drive_ids.size() != request.mode.size())
@@ -154,6 +157,7 @@ void Md80Node::motionCommandCallback(const ros1_mab_md80::MotionCommand::ConstPt
 		md->setTorque(msg->target_torque[i]);
 	}
 }
+
 void Md80Node::impedanceCommandCallback(const ros1_mab_md80::ImpedanceCommand::ConstPtr& msg)
 {
 	if(msg->drive_ids.size() != msg->kp.size() || msg->drive_ids.size() != msg->kd.size())
@@ -168,6 +172,7 @@ void Md80Node::impedanceCommandCallback(const ros1_mab_md80::ImpedanceCommand::C
 		md->setImpedanceController(msg->kp[i], msg->kd[i]);
 	}
 }
+
 void Md80Node::velocityCommandCallback(const ros1_mab_md80::VelocityPidCommand::ConstPtr& msg)
 {
 	if(msg->drive_ids.size() != msg->velocity_pid.size())
@@ -181,6 +186,7 @@ void Md80Node::velocityCommandCallback(const ros1_mab_md80::VelocityPidCommand::
 		md->setVelocityController(msg->velocity_pid[i].kp, msg->velocity_pid[i].ki, msg->velocity_pid[i].kd, msg->velocity_pid[i].i_windup);
 	}
 }
+
 void Md80Node::positionCommandCallback(const ros1_mab_md80::PositionPidCommand::ConstPtr& msg)
 {
 	if(msg->drive_ids.size() != msg->position_pid.size())

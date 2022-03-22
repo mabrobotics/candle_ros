@@ -4,7 +4,7 @@
   <name>ros1_mab_md80</name>
   <version>0.0.1</version>
   <description>TODO: Package description</description>
-  <maintainer email="piotr.wasilewski@mabrobotics.pl">pwasilewski</maintainer>
+  <maintainer email="piotr.wasilewski@mabrobotics.pl">piwasilewski</maintainer>
   <license>TODO: License declaration</license>
 
   <buildtool_depend>catkin</buildtool_depend>
