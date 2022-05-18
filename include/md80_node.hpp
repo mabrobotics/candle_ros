@@ -45,8 +45,7 @@ private:
     bool service_setModeMd80(ros1_mab_md80::SetModeMd80s::Request& request, ros1_mab_md80::SetModeMd80s::Response& response);
     bool service_enableMd80(ros1_mab_md80::GenericMd80Msg::Request& request,ros1_mab_md80::GenericMd80Msg::Response& response);
     bool service_disableMd80(ros1_mab_md80::GenericMd80Msg::Request& request, ros1_mab_md80::GenericMd80Msg::Response& response);
-    bool service_setLimitsMd80(ros1_mab_md80::SetLimitsMd80::Request& request, ros1_mab_md80::SetLimitsMd80::Response& response);
-
+    
     void publishJointStates();
     
     void motionCommandCallback(const ros1_mab_md80::MotionCommand::ConstPtr& msg);
