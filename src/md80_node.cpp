@@ -20,13 +20,13 @@ Md80Node::Md80Node()
 	pubTimer = n.createTimer(ros::Duration(0.1), std::bind(&Md80Node::publishJointStates, this));
 	pubTimer.stop();
 	
-	ROS_INFO("md80_node has started.");
+	ROS_INFO("candle_ros_node has started.");
 }
 
 Md80Node::~Md80Node()
 {
 	delete candle;
-	ROS_INFO("md80_node finished.");
+	ROS_INFO("candle_ros_node finished.");
 }
 
 bool Md80Node::service_addMd80(candle_ros::AddMd80s::Request& request, candle_ros::AddMd80s::Response& response)
