@@ -77,6 +77,11 @@ Using services `/enable_md80s` and `/disable_md80s` the drives and the node publ
 After enabling, the node will publish current joint states to `/joint_states` at a frequency of 100Hz. Joint names are generated based on drivie ID, for example drive with id 546 will be called `Joint 546`.
 
 The node will also listen for the messages on topics for controlling the drives. All of the above topics are listened to all the time, but currently applied settings are dependent on the md80 mode set before enabling.
+```
+rosservice call /enable_md80s "{drive_ids:[81, 97]}"
+
+rosservice call /disable_md80s "{drive_ids:[81, 97]}"
+```
 
 ### Controlling drives
 Controlling the drives is done via the four topics listed above. For commands to be viable, all field of each message must be filled properly. For example, to set up custom gains for IMPEDANCE mode use:

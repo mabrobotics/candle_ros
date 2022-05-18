@@ -216,7 +216,7 @@ void Md80Node::positionCommandCallback(const candle_ros::PositionPidCommand::Con
 
 int main(int argc, char **argv)
 {
-	ros::init(argc, argv, "md80_node");
+	ros::init(argc, argv, "candle_ros_node");
 	Md80Node n;
 	ros::spin();
 
