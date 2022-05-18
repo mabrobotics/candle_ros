@@ -77,14 +77,19 @@ Using services `/enable_md80s` and `/disable_md80s` the drives and the node publ
 After enabling, the node will publish current joint states to `/joint_states` at a frequency of 100Hz. Joint names are generated based on drivie ID, for example drive with id 546 will be called `Joint 546`.
 
 The node will also listen for the messages on topics for controlling the drives. All of the above topics are listened to all the time, but currently applied settings are dependent on the md80 mode set before enabling.
+```
+rosservice call /enable_md80s "{drive_ids:[81, 97]}"
+
+rosservice call /disable_md80s "{drive_ids:[81, 97]}"
+```
 
 ### Controlling drives
 Controlling the drives is done via the four topics listed above. For commands to be viable, all field of each message must be filled properly. For example, to set up custom gains for IMPEDANCE mode use:
 ```
-rostopic pub /md80/impedance_command ros1_mab_md80/ImpedanceCommand "{drive_ids:[81, 97], kp:[0.25, 1.0], kd:[0.1, 0.05], max_output:[2.0, 2.0]}"
+rostopic pub /md80/impedance_command candle_ros/ImpedanceCommand "{drive_ids:[81, 97], kp:[0.25, 1.0], kd:[0.1, 0.05], max_output:[2.0, 2.0]}"
 ```
 
 Setting desired position, velocity, and torque is done via `/md80/motion_command` topic. Note that for it to take effect, all fields in the message should be correctly filled. For example, to move the drives in impedance mode, it is possible to use the following command
 ```
-rostopic pub /md80/motion_command ros1_mab_md80/MotionCommand "{drive_ids:[81,97], target_position:[3.0, -3.0], target_velocity:[0.0, 0.0], target_torque:[0, 0]}" -1
+rostopic pub /md80/motion_command candle_ros/MotionCommand "{drive_ids:[81,97], target_position:[3.0, -3.0], target_velocity:[0.0, 0.0], target_torque:[0, 0]}" -1
 ```

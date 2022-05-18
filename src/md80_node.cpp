@@ -20,16 +20,16 @@ Md80Node::Md80Node()
 	pubTimer = n.createTimer(ros::Duration(0.1), std::bind(&Md80Node::publishJointStates, this));
 	pubTimer.stop();
 	
-	ROS_INFO("md80_node has started.");
+	ROS_INFO("candle_ros_node has started.");
 }
 
 Md80Node::~Md80Node()
 {
 	delete candle;
-	ROS_INFO("md80_node finished.");
+	ROS_INFO("candle_ros_node finished.");
 }
 
-bool Md80Node::service_addMd80(ros1_mab_md80::AddMd80s::Request& request, ros1_mab_md80::AddMd80s::Response& response)
+bool Md80Node::service_addMd80(candle_ros::AddMd80s::Request& request, candle_ros::AddMd80s::Response& response)
 { 
 	for(auto&id : request.drive_ids)
 		response.drives_success.push_back(candle->addMd80(id));
@@ -39,7 +39,7 @@ bool Md80Node::service_addMd80(ros1_mab_md80::AddMd80s::Request& request, ros1_m
 	return true;
 }
 
-bool Md80Node::service_zeroMd80(ros1_mab_md80::GenericMd80Msg::Request& request, ros1_mab_md80::GenericMd80Msg::Response& response)
+bool Md80Node::service_zeroMd80(candle_ros::GenericMd80Msg::Request& request, candle_ros::GenericMd80Msg::Response& response)
 {
 	for(auto&id : request.drive_ids)
 		response.drives_success.push_back(candle->controlMd80SetEncoderZero(id));
@@ -47,7 +47,7 @@ bool Md80Node::service_zeroMd80(ros1_mab_md80::GenericMd80Msg::Request& request,
 	return true;
 }
 
-bool Md80Node::service_setModeMd80(ros1_mab_md80::SetModeMd80s::Request& request, ros1_mab_md80::SetModeMd80s::Response& response)
+bool Md80Node::service_setModeMd80(candle_ros::SetModeMd80s::Request& request, candle_ros::SetModeMd80s::Response& response)
 {
 	if(request.drive_ids.size() != request.mode.size())
 	{
@@ -82,7 +82,7 @@ bool Md80Node::service_setModeMd80(ros1_mab_md80::SetModeMd80s::Request& request
 	return true;
 }
 
-bool Md80Node::service_enableMd80(ros1_mab_md80::GenericMd80Msg::Request& request,ros1_mab_md80::GenericMd80Msg::Response& response)
+bool Md80Node::service_enableMd80(candle_ros::GenericMd80Msg::Request& request,candle_ros::GenericMd80Msg::Response& response)
 {
 	for(auto&id : request.drive_ids)
 		response.drives_success.push_back(candle->controlMd80Enable(id,true));
@@ -92,7 +92,7 @@ bool Md80Node::service_enableMd80(ros1_mab_md80::GenericMd80Msg::Request& reques
 	return true;
 }
 
-bool Md80Node::service_disableMd80(ros1_mab_md80::GenericMd80Msg::Request& request, ros1_mab_md80::GenericMd80Msg::Response& response)
+bool Md80Node::service_disableMd80(candle_ros::GenericMd80Msg::Request& request, candle_ros::GenericMd80Msg::Response& response)
 {
 	candle->end();
 	pubTimer.stop();
@@ -116,7 +116,7 @@ void Md80Node::publishJointStates()
 	this->jointStatePub.publish(jointStateMsg);
 }
 
-void Md80Node::motionCommandCallback(const ros1_mab_md80::MotionCommand::ConstPtr& msg)
+void Md80Node::motionCommandCallback(const candle_ros::MotionCommand::ConstPtr& msg)
 {
 	if(msg->drive_ids.size() != msg->target_position.size() || msg->drive_ids.size() != msg->target_velocity.size() ||
 		msg->drive_ids.size() != msg->target_torque.size())
@@ -141,7 +141,7 @@ void Md80Node::motionCommandCallback(const ros1_mab_md80::MotionCommand::ConstPt
 	}
 }
 
-void Md80Node::impedanceCommandCallback(const ros1_mab_md80::ImpedanceCommand::ConstPtr& msg)
+void Md80Node::impedanceCommandCallback(const candle_ros::ImpedanceCommand::ConstPtr& msg)
 {
 	if(msg->drive_ids.size() != msg->kp.size() || msg->drive_ids.size() != msg->kd.size())
 	{
@@ -165,7 +165,7 @@ void Md80Node::impedanceCommandCallback(const ros1_mab_md80::ImpedanceCommand::C
 	}
 }
 
-void Md80Node::velocityCommandCallback(const ros1_mab_md80::VelocityPidCommand::ConstPtr& msg)
+void Md80Node::velocityCommandCallback(const candle_ros::VelocityPidCommand::ConstPtr& msg)
 {
 	if(msg->drive_ids.size() != msg->velocity_pid.size())
 	{
@@ -188,7 +188,7 @@ void Md80Node::velocityCommandCallback(const ros1_mab_md80::VelocityPidCommand::
 	}
 }
 
-void Md80Node::positionCommandCallback(const ros1_mab_md80::PositionPidCommand::ConstPtr& msg)
+void Md80Node::positionCommandCallback(const candle_ros::PositionPidCommand::ConstPtr& msg)
 {
 	if(msg->drive_ids.size() != msg->position_pid.size())
 	{
@@ -216,7 +216,7 @@ void Md80Node::positionCommandCallback(const ros1_mab_md80::PositionPidCommand::
 
 int main(int argc, char **argv)
 {
-	ros::init(argc, argv, "md80_node");
+	ros::init(argc, argv, "candle_ros_node");
 	Md80Node n;
 	ros::spin();
 

@@ -1,15 +1,15 @@
 #include "ros/ros.h"
 #include "candle.hpp"
 
-#include "ros1_mab_md80/ImpedanceCommand.h"
-#include "ros1_mab_md80/MotionCommand.h"
-#include "ros1_mab_md80/VelocityPidCommand.h"
-#include "ros1_mab_md80/PositionPidCommand.h"
+#include "candle_ros/ImpedanceCommand.h"
+#include "candle_ros/MotionCommand.h"
+#include "candle_ros/VelocityPidCommand.h"
+#include "candle_ros/PositionPidCommand.h"
 
-#include "ros1_mab_md80/AddMd80s.h"
-#include "ros1_mab_md80/GenericMd80Msg.h"
-#include "ros1_mab_md80/SetModeMd80s.h"
-#include "ros1_mab_md80/SetLimitsMd80.h"
+#include "candle_ros/AddMd80s.h"
+#include "candle_ros/GenericMd80Msg.h"
+#include "candle_ros/SetModeMd80s.h"
+#include "candle_ros/SetLimitsMd80.h"
 
 #include "sensor_msgs/JointState.h"
 
@@ -40,17 +40,17 @@ private:
     ros::Subscriber velocityCommandSub;
     ros::Subscriber positionCommandSub;
 
-    bool service_addMd80(ros1_mab_md80::AddMd80s::Request& request, ros1_mab_md80::AddMd80s::Response& response);
-    bool service_zeroMd80(ros1_mab_md80::GenericMd80Msg::Request& request, ros1_mab_md80::GenericMd80Msg::Response& response);
-    bool service_setModeMd80(ros1_mab_md80::SetModeMd80s::Request& request, ros1_mab_md80::SetModeMd80s::Response& response);
-    bool service_enableMd80(ros1_mab_md80::GenericMd80Msg::Request& request,ros1_mab_md80::GenericMd80Msg::Response& response);
-    bool service_disableMd80(ros1_mab_md80::GenericMd80Msg::Request& request, ros1_mab_md80::GenericMd80Msg::Response& response);
+    bool service_addMd80(candle_ros::AddMd80s::Request& request, candle_ros::AddMd80s::Response& response);
+    bool service_zeroMd80(candle_ros::GenericMd80Msg::Request& request, candle_ros::GenericMd80Msg::Response& response);
+    bool service_setModeMd80(candle_ros::SetModeMd80s::Request& request, candle_ros::SetModeMd80s::Response& response);
+    bool service_enableMd80(candle_ros::GenericMd80Msg::Request& request,candle_ros::GenericMd80Msg::Response& response);
+    bool service_disableMd80(candle_ros::GenericMd80Msg::Request& request, candle_ros::GenericMd80Msg::Response& response);
     
     void publishJointStates();
     
-    void motionCommandCallback(const ros1_mab_md80::MotionCommand::ConstPtr& msg);
-    void impedanceCommandCallback(const ros1_mab_md80::ImpedanceCommand::ConstPtr& msg);
-    void velocityCommandCallback(const ros1_mab_md80::VelocityPidCommand::ConstPtr& msg);
-    void positionCommandCallback(const ros1_mab_md80::PositionPidCommand::ConstPtr& msg);
+    void motionCommandCallback(const candle_ros::MotionCommand::ConstPtr& msg);
+    void impedanceCommandCallback(const candle_ros::ImpedanceCommand::ConstPtr& msg);
+    void velocityCommandCallback(const candle_ros::VelocityPidCommand::ConstPtr& msg);
+    void positionCommandCallback(const candle_ros::PositionPidCommand::ConstPtr& msg);
 
 };

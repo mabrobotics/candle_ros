@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(ros1_mab_md80)
+project(candle_ros)
 
 # Default to C99
 if(NOT CMAKE_C_STANDARD)
@@ -23,7 +23,6 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs 
   sensor_msgs
 )
-
 
 add_message_files(
   DIRECTORY msg  
@@ -54,7 +53,7 @@ include_directories(
 
 set(CMAKE_INSTALL_RPATH $ORIGIN)  # sets proper runtime paths for exec to link .so properly
 
-add_executable(md80_node src/md80_node.cpp)
-target_link_libraries(md80_node "${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/lib/libcandle.so" ${catkin_LIBRARIES}) 
-target_include_directories(md80_node PUBLIC ./include)
-add_dependencies(md80_node ${${PROJECT_NAME}_EXPORTED_TARGETS})
+add_executable(${PROJECT_NAME}_node src/md80_node.cpp)
+target_link_libraries(${PROJECT_NAME}_node "${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/lib/libcandle.so" ${catkin_LIBRARIES}) 
+target_include_directories(${PROJECT_NAME}_node PUBLIC ./include)
+add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS})
