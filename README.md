@@ -64,12 +64,6 @@ Often when starting, setting a current position to zero is desired. This can be 
 rosservice call /zero_md80s "{drive_ids:[81, 97]}"
 ```
 
-### Setting limits
-The limits can be set using `/set_limits_md80s` service, for example 
-```
-rosservice call /set_limits_md80s "{drive_ids:[81, 97], velocity_limit:[10, 20], torque_limit:[0.1, 0.1]}"
-```
-
 ### Enabling/Disabling drives
 Using services `/enable_md80s` and `/disable_md80s` the drives and the node publishers and subscribers can be enabled/disabled.
 **NOTE: After calling `/enable_md80s` service, no calls to services other than `/disable_md80s` should be done.**
