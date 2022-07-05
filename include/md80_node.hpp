@@ -21,7 +21,7 @@ public:
 
 private:
 
-    mab::Candle*candle;
+    std::vector<mab::Candle*> candleInstances;
 
     ros::NodeHandle n;
     ros::Timer pubTimer;
@@ -46,8 +46,8 @@ private:
     bool service_enableMd80(candle_ros::GenericMd80Msg::Request& request,candle_ros::GenericMd80Msg::Response& response);
     bool service_disableMd80(candle_ros::GenericMd80Msg::Request& request, candle_ros::GenericMd80Msg::Response& response);
     
+    mab::Candle* findCandleByMd80Id(uint16_t md80Id);
     void publishJointStates();
-    
     void motionCommandCallback(const candle_ros::MotionCommand::ConstPtr& msg);
     void impedanceCommandCallback(const candle_ros::ImpedanceCommand::ConstPtr& msg);
     void velocityCommandCallback(const candle_ros::VelocityPidCommand::ConstPtr& msg);
