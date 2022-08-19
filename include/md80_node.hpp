@@ -1,5 +1,5 @@
 #include "ros/ros.h"
-#include "Candle/candle.hpp"
+#include "candle.hpp"
 
 #include "candle_ros/ImpedanceCommand.h"
 #include "candle_ros/MotionCommand.h"

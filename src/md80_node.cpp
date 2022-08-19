@@ -1,5 +1,4 @@
 #include "md80_node.hpp"
-#include "Candle/candle.hpp"
 
 Md80Node::Md80Node(int argc, char **argv)
 {
@@ -66,7 +65,8 @@ Md80Node::Md80Node(int argc, char **argv)
 		try
 		{
 			auto candle = new mab::Candle(baud, true, mode, false, bus);
-			std::cout<<"[CANDLE] Found CANdle with ID: "<<candle->getUsbDeviceId()<<std::endl;
+			if(bus == mab::BusType_E::USB) 
+				std::cout<<"[CANDLE] Found CANdle with ID: "<<candle->getUsbDeviceId()<<std::endl;
 			candleInstances.push_back(candle);
 		}
 		catch(const char* eMsg)
