@@ -17,6 +17,7 @@ class Md80Node
 {
 public:
     Md80Node();
+    Md80Node(int argc, char **argv);
     ~Md80Node();
 
 private:
