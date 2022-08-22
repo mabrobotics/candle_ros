@@ -2,11 +2,6 @@
 
 Md80Node::Md80Node(int argc, char **argv)
 {
-	if (argc < 3)
-	{
-		std::cout << "Wrong arguments specified, please see ./latency_test --help" << std::endl;
-		return;
-	}
 
 	if (strcmp(argv[1], "--help") == 0)
 	{
@@ -15,6 +10,12 @@ Md80Node::Md80Node(int argc, char **argv)
 		std::cout << "<mode> can be NORMAL/FAST1/FAST2" << std::endl;
 		std::cout << "<baud> can be 1M/2M/5M/8M" << std::endl;
 		std::cout << "[--help] - displays help message" << std::endl;
+		return;
+	}
+
+	if (argc < 3)
+	{
+		std::cout << "Wrong arguments specified, please see candle_ros candle_ros_node --help" << std::endl;
 		return;
 	}
 
@@ -60,19 +61,24 @@ Md80Node::Md80Node(int argc, char **argv)
 		return;
 	}
 
-	while(1)
+	while(bus == mab::BusType_E::USB)
 	{
 		try
 		{
 			auto candle = new mab::Candle(baud, true, mode, false, bus);
-			if(bus == mab::BusType_E::USB) 
-				std::cout<<"[CANDLE] Found CANdle with ID: "<<candle->getUsbDeviceId()<<std::endl;
+			std::cout<<"[CANDLE] Found CANdle with ID: "<<candle->getUsbDeviceId()<<std::endl;
 			candleInstances.push_back(candle);
 		}
 		catch(const char* eMsg)
 		{
 			break;
 		}
+	}
+
+	if(bus != mab::BusType_E::USB)
+	{
+		auto candle = new mab::Candle(baud, true, mode, false, bus);
+		candleInstances.push_back(candle);
 	}
 
 	addMd80Service = n.advertiseService("/add_md80s", &Md80Node::service_addMd80, this);

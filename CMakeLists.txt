@@ -59,7 +59,6 @@ set(CMAKE_INSTALL_RPATH $ORIGIN)  # sets proper runtime paths for exec to link .
 
 add_executable(${PROJECT_NAME}_node src/md80_node.cpp)
 target_link_libraries(${PROJECT_NAME}_node candle ${catkin_LIBRARIES})
-# target_link_libraries(${PROJECT_NAME}_node "${CMAKE_SOURCE_DIR}/lib/libcandle.so" ${catkin_LIBRARIES}) 
 target_include_directories(${PROJECT_NAME}_node PUBLIC ./candle_gitlab/Candle/include ./include)
 
 add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS})
