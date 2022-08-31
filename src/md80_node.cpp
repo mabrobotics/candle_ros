@@ -182,8 +182,8 @@ bool Md80Node::service_setModeMd80(candle_ros::SetModeMd80s::Request& request, c
 			mode = mab::Md80Mode_E::POSITION_PID;
 		else if (request.mode[i] == "VELOCITY_PID")
 			mode = mab::Md80Mode_E::VELOCITY_PID;
-		else if (request.mode[i] == "TORQUE")
-			mode = mab::Md80Mode_E::TORQUE;
+		else if (request.mode[i] == "DEPRECATED")
+			mode = mab::Md80Mode_E::DEPRECATED;
 		else
 		{
 			ROS_WARN("MODE %s not recognized, setting IDLE for driveID = %d", request.mode[i].c_str(), request.drive_ids[i]);
