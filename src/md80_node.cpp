@@ -18,7 +18,6 @@ Md80Node::Md80Node(int argc, char** argv)
 	}
 
 	mab::BusType_E bus = mab::BusType_E::USB;
-	mab::CANdleFastMode_E mode = mab::CANdleFastMode_E::NORMAL;
 	mab::CANdleBaudrate_E baud = mab::CAN_BAUD_1M;
 
 	if (strcmp(argv[1], "SPI") == 0)
@@ -51,8 +50,8 @@ Md80Node::Md80Node(int argc, char** argv)
 	{
 		try
 		{
-			auto candle = new mab::Candle(baud, true, mode, false, bus);
-			std::cout << "[CANDLE] Found CANdle with ID: " << candle->getUsbDeviceId() << std::endl;
+			auto candle = new mab::Candle(baud, true, false, bus);
+			std::cout << "[CANDLE] Found CANdle with ID: " << candle->getDeviceId() << std::endl;
 			candleInstances.push_back(candle);
 		}
 		catch (const char* eMsg)
@@ -63,7 +62,7 @@ Md80Node::Md80Node(int argc, char** argv)
 
 	if (bus != mab::BusType_E::USB)
 	{
-		auto candle = new mab::Candle(baud, true, mode, false, bus);
+		auto candle = new mab::Candle(baud, true, false, bus);
 		candleInstances.push_back(candle);
 	}
 
@@ -134,10 +133,7 @@ bool Md80Node::service_addMd80(candle_ros::AddMd80s::Request& request, candle_ro
 
 	/* collect total number of drives from all CANdle devices */
 	for (auto candle : candleInstances)
-	{
-		candle->updateModeBasedOnMd80List();
 		totalNumberOfDrives += candle->md80s.size();
-	}
 
 	response.total_number_of_drives = totalNumberOfDrives;
 
