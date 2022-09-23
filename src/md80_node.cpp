@@ -50,7 +50,7 @@ Md80Node::Md80Node(int argc, char** argv)
 	{
 		try
 		{
-			auto candle = new mab::Candle(baud, true, false, bus);
+			auto candle = new mab::Candle(baud, true, bus);
 			std::cout << "[CANDLE] Found CANdle with ID: " << candle->getDeviceId() << std::endl;
 			candleInstances.push_back(candle);
 		}
@@ -62,7 +62,7 @@ Md80Node::Md80Node(int argc, char** argv)
 
 	if (bus != mab::BusType_E::USB)
 	{
-		auto candle = new mab::Candle(baud, true, false, bus);
+		auto candle = new mab::Candle(baud, true, bus);
 		candleInstances.push_back(candle);
 	}
 
