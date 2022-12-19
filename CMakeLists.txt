@@ -51,9 +51,14 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
+set(CANDLE_BUILD_STATIC ON)
+set(CANDLE_OMIT_EXAMPLES ON)
+add_subdirectory(candle)
+
 set(CMAKE_INSTALL_RPATH $ORIGIN)  # sets proper runtime paths for exec to link .so properly
 
 add_executable(${PROJECT_NAME}_node src/md80_node.cpp)
-target_link_libraries(${PROJECT_NAME}_node "${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/lib/libcandle.so" ${catkin_LIBRARIES}) 
-target_include_directories(${PROJECT_NAME}_node PUBLIC ./include)
+target_link_libraries(${PROJECT_NAME}_node candle ${catkin_LIBRARIES})
+target_include_directories(${PROJECT_NAME}_node PUBLIC ./candle/include ./include)
+
 add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS})
