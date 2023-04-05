@@ -1,6 +1,6 @@
 #include "md80_node.hpp"
 
-const std::string version = "v1.2";
+const std::string version = "v1.3.0";
 
 Md80Node::Md80Node(int argc, char** argv)
 {
