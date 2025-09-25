@@ -1,3 +1,9 @@
+![status: unmaintained](https://img.shields.io/badge/status-unmaintained-red)
+
+> ⚠️ **Notice**  
+> This project is no longer maintained since [ROS 1](https://wiki.ros.org/Documentation) reached end of life (May 31, 2025).  
+> Please use the ROS 2 version instead: [candle_ros2](https://github.com/mabrobotics/candle_ros2/tree/main).
+
 # MD80 ROS Node
 
 This node handles the communication between MAB's MD80 drives in ROS environment. The node was designed to act as 
